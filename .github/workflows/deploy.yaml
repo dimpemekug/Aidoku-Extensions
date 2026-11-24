@@ -1,0 +1,66 @@
+name: Test, package and deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.100.0"
+          targets: wasm32-unknown-unknown
+
+      - name: Cache Rust and the Aidoku tools
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            ~/.cargo/bin/aidoku
+            ~/.cargo/bin/aidoku-test-runner
+            sources/**/target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
+
+      - name: Install the Aidoku tools
+        run: |
+          command -v aidoku || cargo install --locked --git https://github.com/Aidoku/aidoku-rs aidoku-cli
+          command -v aidoku-test-runner || cargo install --locked --git https://github.com/Aidoku/aidoku-rs aidoku-test-runner
+
+      - name: Test, package and verify every source
+        run: |
+          set -euo pipefail
+          for source in sources/*; do
+            [[ -f "$source/Cargo.toml" ]] || continue
+            echo "::group::$source"
+            (cd "$source" && cargo test && aidoku package && aidoku verify package.aix)
+            echo "::endgroup::"
+          done
+
+      - name: Build the source list and the homepage
+        run: |
+          aidoku build sources/*/package.aix --name "Aidoku Extensions"
+          cp site/index.html public/index.html
+          touch public/.nojekyll
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: public
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"

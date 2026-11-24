@@ -1,0 +1,16 @@
+[
+	{
+		"type": "group",
+		"title": "Indirizzo del sito",
+		"items": [
+			{
+				"type": "text",
+				"key": "domain",
+				"title": "Dominio",
+				"placeholder": "https://www.mangaworld.me",
+				"refreshes": ["content", "listings"]
+			}
+		],
+		"footer": "Se MangaWorld cambia di nuovo dominio, scrivi qui quello nuovo (per esempio https://www.mangaworld.xx). Lascia vuoto per usare https://www.mangaworld.me."
+	}
+]

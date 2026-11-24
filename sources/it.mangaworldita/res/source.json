@@ -1,0 +1,18 @@
+{
+	"info": {
+		"id": "it.mangaworldita",
+		"name": "MangaWorld ITA",
+		"altNames": ["MangaWorld"],
+		"version": 1,
+		"url": "https://www.mangaworld.me",
+		"contentRating": 0,
+		"languages": ["it"],
+		"minAppVersion": "0.7.1"
+	},
+	"listings": [
+		{ "id": "latest", "name": "Ultimi capitoli" },
+		{ "id": "most_read", "name": "Più letti" },
+		{ "id": "newest", "name": "Ultime aggiunte" },
+		{ "id": "top_rated", "name": "Più votati" }
+	]
+}
