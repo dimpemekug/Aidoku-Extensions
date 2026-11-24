@@ -38,6 +38,8 @@ jobs:
 
       - name: Install the Aidoku tools
         run: |
+          # The test runner draws text for the canvas module, which needs fontconfig.
+          sudo apt-get update -qq && sudo apt-get install -y -qq libfontconfig1-dev
           command -v aidoku || cargo install --locked --git https://github.com/Aidoku/aidoku-rs aidoku-cli
           command -v aidoku-test-runner || cargo install --locked --git https://github.com/Aidoku/aidoku-rs aidoku-test-runner
 
