@@ -49,7 +49,7 @@ https://dimpemekug.github.io/Aidoku-Extensions/index.min.json
 | App | Dove incollare l'indirizzo |
 |---|---|
 | 📙 **Aidoku** | **Impostazioni › Liste di fonti**, poi tocca **+** |
-| 📗 **Legendum** | **Esplora › Aggiungi repository** |
+| 📗 **Legendum** | **Impostazioni › Fonti › Aggiungi repository › Aidoku** |
 
 Poi installa **MangaWorld ITA** e inizia a leggere.
 

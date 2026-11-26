@@ -18,7 +18,7 @@ sources/it.mangaworldita/
 │   ├── parse.rs         lettura dell'HTML, senza richieste (provabile offline)
 │   └── tests.rs         test offline sulle pagine salvate
 └── tests/fixtures/      pagine di www.mangaworld.me senza script, stili e icone
-site/index.html          pagina del repository (pulsanti, indirizzo, elenco fonti)
+site/index.html          pagina del repository, uguale a quella di Paperback-Extensions
 site/icon.png            icona del repository, da assets/icon-extensions.svg
 assets/                  icone in SVG
 ```
@@ -47,6 +47,16 @@ Icona della fonte: `rsvg-convert -w 128 -h 128 assets/icon-mangaworld.svg -o sou
 
 Icona del repository (pagina, favicon e README), generica per tutte le fonti:
 `rsvg-convert -w 256 -h 256 assets/icon-extensions.svg -o site/icon.png && cp site/icon.png assets/icon-extensions.png`
+
+## Pagina del repository
+
+`site/index.html` è la stessa pagina, identica, in Aidoku-Extensions e in Paperback-Extensions:
+capisce da sola il formato (`index.min.json` o `versioning.json`) e ne ricava pulsanti, indirizzo,
+istruzioni e schede delle fonti. Niente CDN né font esterni: CSS e JavaScript sono nel file.
+Se la cambi in un repo, copiala nell'altro (`cp site/index.html ../<altro repo>/site/`), così le
+due pagine restano uguali. Per provarla in locale servi la cartella pubblicata insieme alla pagina
+(per esempio `python3 -m http.server` nella cartella che contiene `public/` o `bundles/` copiate
+come `Aidoku-Extensions/` e `Paperback-Extensions/`).
 
 ## Pubblicare una nuova versione
 
