@@ -19,6 +19,7 @@ sources/it.mangaworldita/
 │   └── tests.rs         test offline sulle pagine salvate
 └── tests/fixtures/      pagine di www.mangaworld.me senza script, stili e icone
 site/index.html          pagina del repository (pulsanti, indirizzo, elenco fonti)
+site/icon.png            icona del repository, da assets/icon-extensions.svg
 assets/                  icone in SVG
 ```
 
@@ -42,7 +43,10 @@ aidoku verify package.aix  # controlla icona, manifest, filtri, impostazioni
 Dalla radice: `aidoku build sources/*/package.aix --name "Aidoku Extensions"` crea `public/`
 (`index.min.json`, icone, pacchetti); il workflow ci copia `site/index.html` e pubblica su GitHub Pages.
 
-Icona: `rsvg-convert -w 128 -h 128 assets/icon-mangaworld.svg -o sources/it.mangaworldita/res/icon.png`
+Icona della fonte: `rsvg-convert -w 128 -h 128 assets/icon-mangaworld.svg -o sources/it.mangaworldita/res/icon.png`
+
+Icona del repository (pagina, favicon e README), generica per tutte le fonti:
+`rsvg-convert -w 256 -h 256 assets/icon-extensions.svg -o site/icon.png && cp site/icon.png assets/icon-extensions.png`
 
 ## Pubblicare una nuova versione
 

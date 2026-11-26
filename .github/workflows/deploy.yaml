@@ -56,7 +56,7 @@ jobs:
       - name: Build the source list and the homepage
         run: |
           aidoku build sources/*/package.aix --name "Aidoku Extensions"
-          cp site/index.html public/index.html
+          cp site/index.html site/icon.png public/
           touch public/.nojekyll
 
       - name: Publish to GitHub Pages

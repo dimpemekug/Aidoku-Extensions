@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="sources/it.mangaworldita/res/icon.png" width="128" alt="MangaWorld ITA">
+<img src="assets/icon-extensions.png" width="128" alt="">
 
 # MangaWorld ITA per Aidoku e Legendum
 
